@@ -62,7 +62,10 @@ namespace Microsoft.AspNet.Razor.Parser
                     }
                     else
                     {
-                        Context.OnError(CurrentSymbol.Start, RazorResources.ParseError_MarkupBlock_Must_Start_With_Tag);
+                        Context.OnError(
+                            CurrentSymbol.Start,
+                            RazorResources.ParseError_MarkupBlock_Must_Start_With_Tag,
+                            CurrentSymbol.Content.Length);
                     }
                     Output(SpanKind.Markup);
                 }
@@ -221,7 +224,10 @@ namespace Microsoft.AspNet.Razor.Parser
             }
             if (tags.Count == 0)
             {
-                Context.OnError(CurrentLocation, RazorResources.ParseError_OuterTagMissingName);
+                Context.OnError(
+                    CurrentLocation,
+                    RazorResources.ParseError_OuterTagMissingName,
+                    length: 1  /* end of file */);
             }
             return false;
         }
@@ -346,8 +352,6 @@ namespace Microsoft.AspNet.Razor.Parser
 
         private bool EndTextTag(HtmlSymbol solidus, IDisposable tagBlockWrapper)
         {
-            var start = _bufferedOpenAngle.Start;
-
             Accept(_bufferedOpenAngle);
             Accept(solidus);
 
@@ -358,7 +362,10 @@ namespace Microsoft.AspNet.Razor.Parser
 
             if (!seenCloseAngle)
             {
-                Context.OnError(start, RazorResources.ParseError_TextTagCannotContainAttributes);
+                Context.OnError(
+                    CurrentLocation,
+                    RazorResources.ParseError_TextTagCannotContainAttributes,
+                    CurrentSymbol.Content.Length);
 
                 Span.EditHandler.AcceptedCharacters = AcceptedCharacters.Any;
                 RecoverTextTag();
@@ -771,7 +778,10 @@ namespace Microsoft.AspNet.Razor.Parser
                 {
                     Context.Source.Position = bookmark;
                     NextToken();
-                    Context.OnError(tag.Item2, RazorResources.ParseError_TextTagCannotContainAttributes);
+                    Context.OnError(
+                        CurrentLocation,
+                        RazorResources.ParseError_TextTagCannotContainAttributes,
+                        CurrentSymbol.Content.Length);
 
                     RecoverTextTag();
                 }
@@ -821,7 +831,10 @@ namespace Microsoft.AspNet.Razor.Parser
             var seenClose = Optional(HtmlSymbolType.CloseAngle);
             if (!seenClose)
             {
-                Context.OnError(tag.Item2, RazorResources.FormatParseError_UnfinishedTag(tag.Item1.Content));
+                Context.OnError(
+                    tag.Item2,
+                    RazorResources.FormatParseError_UnfinishedTag(tag.Item1.Content),
+                    tag.Item1.Content.Length + 1  /* <tagName */);
             }
             else
             {
@@ -944,7 +957,10 @@ namespace Microsoft.AspNet.Razor.Parser
                         SkipToAndParseCode(HtmlSymbolType.CloseAngle);
                         if (!Optional(HtmlSymbolType.CloseAngle))
                         {
-                            Context.OnError(tagStart, RazorResources.FormatParseError_UnfinishedTag("script"));
+                            Context.OnError(
+                                tagStart,
+                                RazorResources.FormatParseError_UnfinishedTag("script"),
+                                length: 8 /* </script */);
                         }
                         Output(SpanKind.Markup);
                     }
@@ -999,11 +1015,17 @@ namespace Microsoft.AspNet.Razor.Parser
             }
             if (currentTag != null)
             {
-                Context.OnError(currentTag.Item2, RazorResources.FormatParseError_MissingEndTag(currentTag.Item1.Content));
+                Context.OnError(
+                    currentTag.Item2,
+                    RazorResources.FormatParseError_MissingEndTag(currentTag.Item1.Content),
+                    currentTag.Item1.Content.Length + 1 /* <tagName */);
             }
             else
             {
-                Context.OnError(tagStart, RazorResources.FormatParseError_UnexpectedEndTag(tagName));
+                Context.OnError(
+                    tagStart,
+                    RazorResources.FormatParseError_UnexpectedEndTag(tagName),
+                    tagName.Length + 2 /* </tagName */);
             }
             return false;
         }
@@ -1018,7 +1040,10 @@ namespace Microsoft.AspNet.Razor.Parser
                     tags.Pop();
                 }
                 var tag = tags.Pop();
-                Context.OnError(tag.Item2, RazorResources.FormatParseError_MissingEndTag(tag.Item1.Content));
+                Context.OnError(
+                    tag.Item2,
+                    RazorResources.FormatParseError_MissingEndTag(tag.Item1.Content),
+                    tag.Item1.Content.Length + 1 /* <tagName */);
             }
             else if (complete)
             {

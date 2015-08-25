@@ -102,7 +102,10 @@ namespace Microsoft.AspNet.Razor.Parser
                 if (!errorReported)
                 {
                     errorReported = true;
-                    Context.OnError(errorLocation, RazorResources.ParseError_MissingOpenBraceAfterSection);
+                    Context.OnError(
+                        errorLocation,
+                        RazorResources.ParseError_MissingOpenBraceAfterSection,
+                        length: 1  /* { */);
                 }
 
                 PutCurrentBack();
@@ -133,9 +136,10 @@ namespace Microsoft.AspNet.Razor.Parser
             if (!Optional(CSharpSymbolType.RightBrace))
             {
                 editHandler.AutoCompleteString = "}";
-                Context.OnError(CurrentLocation,
-                                RazorResources.FormatParseError_Expected_X(
-                                    Language.GetSample(CSharpSymbolType.RightBrace)));
+                Context.OnError(
+                    CurrentLocation,
+                    RazorResources.FormatParseError_Expected_X(Language.GetSample(CSharpSymbolType.RightBrace)),
+                    length: CurrentSymbol.Content.Length);
             }
             else
             {
@@ -160,8 +164,10 @@ namespace Microsoft.AspNet.Razor.Parser
 
             if (!At(CSharpSymbolType.LeftBrace))
             {
-                Context.OnError(CurrentLocation,
-                                RazorResources.FormatParseError_Expected_X(Language.GetSample(CSharpSymbolType.LeftBrace)));
+                Context.OnError(
+                    CurrentLocation,
+                    RazorResources.FormatParseError_Expected_X(Language.GetSample(CSharpSymbolType.LeftBrace)),
+                    CurrentSymbol.Content.Length);
                 CompleteBlock();
                 Output(SpanKind.MetaCode);
                 return;
@@ -186,7 +192,10 @@ namespace Microsoft.AspNet.Razor.Parser
             if (!At(CSharpSymbolType.RightBrace))
             {
                 editHandler.AutoCompleteString = "}";
-                Context.OnError(blockStart, RazorResources.FormatParseError_Expected_EndOfBlock_Before_EOF(block.Name, "}", "{"));
+                Context.OnError(
+                    blockStart,
+                    RazorResources.FormatParseError_Expected_EndOfBlock_Before_EOF(block.Name, "}", "{"),
+                    block.Name.Length);
                 CompleteBlock();
                 Output(SpanKind.Code);
             }

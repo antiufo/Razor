@@ -35,14 +35,16 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
         /// <see cref="ITagHelper"/> <see cref="Type"/>s.</param>
         /// <returns>An <see cref="IEnumerable{Type}"/> of valid <see cref="ITagHelper"/> <see cref="Type"/>s.
         /// </returns>
-        public IEnumerable<Type> Resolve(string name, 
-                                         SourceLocation documentLocation, 
+        public IEnumerable<Type> Resolve(string name,
+                                         SourceLocation documentLocation,
                                          [NotNull] ErrorSink errorSink)
         {
             if (string.IsNullOrEmpty(name))
             {
-                errorSink.OnError(documentLocation,
-                                  Resources.TagHelperTypeResolver_TagHelperAssemblyNameCannotBeEmptyOrNull);
+                errorSink.OnError(
+                    documentLocation,
+                    Resources.TagHelperTypeResolver_TagHelperAssemblyNameCannotBeEmptyOrNull,
+                    name.Length);
 
                 return Type.EmptyTypes;
             }
@@ -60,7 +62,8 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                     documentLocation,
                     Resources.FormatTagHelperTypeResolver_CannotResolveTagHelperAssembly(
                         assemblyName.Name,
-                        ex.Message));
+                        ex.Message),
+                    name.Length);
 
                 return Type.EmptyTypes;
             }

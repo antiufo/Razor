@@ -234,7 +234,8 @@ namespace Microsoft.AspNet.Razor.Parser.TagHelpers.Internal
                         // an error based on the current childBlock.
                         context.ErrorSink.OnError(
                             tagBlock.Start,
-                            RazorResources.FormatTagHelpersParseTreeRewriter_FoundMalformedTagHelper(tagName));
+                            RazorResources.FormatTagHelpersParseTreeRewriter_FoundMalformedTagHelper(tagName),
+                            tagBlock.Length);
 
                         return false;
                     }
@@ -375,7 +376,8 @@ namespace Microsoft.AspNet.Razor.Parser.TagHelpers.Internal
             {
                 context.ErrorSink.OnError(
                     tag.Start,
-                    RazorResources.FormatTagHelpersParseTreeRewriter_MissingCloseAngle(tagName));
+                    RazorResources.FormatTagHelpersParseTreeRewriter_MissingCloseAngle(tagName),
+                    tag.Length);
 
                 return false;
             }
@@ -503,7 +505,8 @@ namespace Microsoft.AspNet.Razor.Parser.TagHelpers.Internal
                 context.ErrorSink.OnError(
                     malformedTagHelper.Start,
                     RazorResources.FormatTagHelpersParseTreeRewriter_FoundMalformedTagHelper(
-                        malformedTagHelper.TagName));
+                        malformedTagHelper.TagName),
+                    malformedTagHelper.SourceStartTag.Length);
 
                 BuildCurrentlyTrackedTagHelperBlock(endTag: null);
             }
