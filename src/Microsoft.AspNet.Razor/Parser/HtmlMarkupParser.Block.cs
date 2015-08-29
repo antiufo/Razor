@@ -453,6 +453,7 @@ namespace Microsoft.AspNet.Razor.Parser
             // http://dev.w3.org/html5/spec/tokenization.html#attribute-name-state
             // Read the 'name' (i.e. read until the '=' or whitespace/newline)
             var name = Enumerable.Empty<HtmlSymbol>();
+            var whitespaceAfterAttributeName = Enumerable.Empty<HtmlSymbol>();
             if (At(HtmlSymbolType.Text))
             {
                 name = ReadWhile(sym =>
@@ -462,6 +463,11 @@ namespace Microsoft.AspNet.Razor.Parser
                                  sym.Type != HtmlSymbolType.CloseAngle &&
                                  sym.Type != HtmlSymbolType.OpenAngle &&
                                  (sym.Type != HtmlSymbolType.ForwardSlash || !NextIs(HtmlSymbolType.CloseAngle)));
+
+                // capture whitespace after attribute name (if any)
+                whitespaceAfterAttributeName = ReadWhile(
+                    sym => sym.Type == HtmlSymbolType.WhiteSpace ||
+                    sym.Type == HtmlSymbolType.NewLine);
             }
             else
             {
@@ -484,6 +490,7 @@ namespace Microsoft.AspNet.Razor.Parser
                 {
                     Accept(whitespace);
                     Accept(name);
+                    Accept(whitespaceAfterAttributeName);
                     Output(SpanKind.Markup);
                 }
 
@@ -497,11 +504,14 @@ namespace Microsoft.AspNet.Razor.Parser
             // Start a new markup block for the attribute
             using (Context.StartBlock(BlockType.Markup))
             {
-                AttributePrefix(whitespace, name);
+                AttributePrefix(whitespace, name, whitespaceAfterAttributeName);
             }
         }
 
-        private void AttributePrefix(IEnumerable<HtmlSymbol> whitespace, IEnumerable<HtmlSymbol> nameSymbols)
+        private void AttributePrefix(
+            IEnumerable<HtmlSymbol> whitespace,
+            IEnumerable<HtmlSymbol> nameSymbols,
+            IEnumerable<HtmlSymbol> whitespaceAfterAttributeName)
         {
             // First, determine if this is a 'data-' attribute (since those can't use conditional attributes)
             var name = nameSymbols.GetContent(Span.Start);
@@ -510,8 +520,13 @@ namespace Microsoft.AspNet.Razor.Parser
             // Accept the whitespace and name
             Accept(whitespace);
             Accept(nameSymbols);
+            Accept(whitespaceAfterAttributeName);
             Assert(HtmlSymbolType.Equals); // We should be at "="
             AcceptAndMoveNext();
+
+            // Accept the whitespace after Equals
+            AcceptWhile(sym => sym.Type == HtmlSymbolType.WhiteSpace || sym.Type == HtmlSymbolType.NewLine);
+
             var quote = HtmlSymbolType.Unknown;
             if (At(HtmlSymbolType.SingleQuote) || At(HtmlSymbolType.DoubleQuote))
             {

@@ -29,6 +29,20 @@ namespace Microsoft.AspNet.Razor.Test.Parser.Html
         }
 
         [Fact]
+        public void SimpleLiteralAttributeWithWhitespaceSurroundingEquals()
+        {
+            ParseBlockTest($"<a href {Environment.NewLine}= {Environment.NewLine}'Foo' />",
+                new MarkupBlock(
+                    new MarkupTagBlock(
+                        Factory.Markup("<a"),
+                        new MarkupBlock(new AttributeBlockChunkGenerator(name: "href", prefix: new LocationTagged<string>($" href {Environment.NewLine}= {Environment.NewLine}'", 2, 0, 2), suffix: new LocationTagged<string>("'", 18, 2, 4)),
+                            Factory.Markup($" href {Environment.NewLine}= {Environment.NewLine}'").With(SpanChunkGenerator.Null),
+                            Factory.Markup("Foo").With(new LiteralAttributeChunkGenerator(prefix: new LocationTagged<string>(string.Empty, 15, 2, 1), value: new LocationTagged<string>("Foo", 15, 2, 1))),
+                            Factory.Markup("'").With(SpanChunkGenerator.Null)),
+                        Factory.Markup(" />").Accepts(AcceptedCharacters.None))));
+        }
+
+        [Fact]
         public void MultiPartLiteralAttribute()
         {
             ParseBlockTest("<a href='Foo Bar Baz' />",
