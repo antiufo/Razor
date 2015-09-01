@@ -94,7 +94,8 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                         {
                             new RazorError(
                                 string.Format(multipleDirectiveError, SyntaxConstants.CSharp.TagHelperPrefixKeyword),
-                                directiveLocation2)
+                                directiveLocation2,
+                                length: 9)
                         }
                     },
                     {
@@ -125,7 +126,8 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                         {
                             new RazorError(
                                 string.Format(multipleDirectiveError, SyntaxConstants.CSharp.TagHelperPrefixKeyword),
-                                directiveLocation2)
+                                directiveLocation2,
+                                length: 9)
                         }
                     },
                     {
@@ -162,7 +164,8 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                         {
                             new RazorError(
                                 string.Format(multipleDirectiveError, SyntaxConstants.CSharp.TagHelperPrefixKeyword),
-                                directiveLocation2)
+                                directiveLocation2,
+                                length: 9)
                         }
                     },
                     {
@@ -185,7 +188,8 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                                     SyntaxConstants.CSharp.TagHelperPrefixKeyword,
                                     ' ',
                                     "th "),
-                                directiveLocation1)
+                                directiveLocation1,
+                                length: 3)
                         }
                     },
                     {
@@ -208,7 +212,8 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                                     SyntaxConstants.CSharp.TagHelperPrefixKeyword,
                                     '\t',
                                     "th\t"),
-                                directiveLocation1)
+                                directiveLocation1,
+                                length: 3)
                         }
                     },
                     {
@@ -231,7 +236,8 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                                     SyntaxConstants.CSharp.TagHelperPrefixKeyword,
                                     Environment.NewLine[0],
                                     "th" + Environment.NewLine),
-                                directiveLocation1)
+                                directiveLocation1,
+                                length: 2 + Environment.NewLine.Length)
                         }
                     },
                     {
@@ -254,7 +260,8 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                                     SyntaxConstants.CSharp.TagHelperPrefixKeyword,
                                     ' ',
                                     " th "),
-                                directiveLocation1)
+                                directiveLocation1,
+                                length: 4)
                         }
                     },
                     {
@@ -277,7 +284,8 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                                     SyntaxConstants.CSharp.TagHelperPrefixKeyword,
                                     '@',
                                     "@"),
-                                directiveLocation1)
+                                directiveLocation1,
+                                length: 1)
                         }
                     },
                     {
@@ -300,7 +308,8 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                                     SyntaxConstants.CSharp.TagHelperPrefixKeyword,
                                     '@',
                                     "t@h"),
-                                directiveLocation1)
+                                directiveLocation1,
+                                length: 3)
                         }
                     },
                     {
@@ -323,7 +332,8 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                                     SyntaxConstants.CSharp.TagHelperPrefixKeyword,
                                     '!',
                                     "!"),
-                                directiveLocation1)
+                                directiveLocation1,
+                                length: 1)
                         }
                     },
                     {
@@ -346,7 +356,8 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                                     SyntaxConstants.CSharp.TagHelperPrefixKeyword,
                                     '!',
                                     "!th"),
-                                directiveLocation1)
+                                directiveLocation1,
+                                length: 3)
                         }
                     },
                 };
@@ -1336,20 +1347,20 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
         }
 
         [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        [InlineData("*,")]
-        [InlineData("?,")]
-        [InlineData(",")]
-        [InlineData(",,,")]
-        [InlineData("First, ")]
-        [InlineData("First , ")]
-        [InlineData(" ,Second")]
-        [InlineData(" , Second")]
-        [InlineData("SomeType,")]
-        [InlineData("SomeAssembly")]
-        [InlineData("First,Second,Third")]
-        public void DescriptorResolver_CreatesErrorIfInvalidLookupText_DoesNotThrow(string lookupText)
+        [InlineData("", 1)]
+        [InlineData(null, 1)]
+        [InlineData("*,", 2)]
+        [InlineData("?,", 2)]
+        [InlineData(",", 1)]
+        [InlineData(",,,", 3)]
+        [InlineData("First, ", 7)]
+        [InlineData("First , ", 8)]
+        [InlineData(" ,Second", 8)]
+        [InlineData(" , Second", 9)]
+        [InlineData("SomeType,", 9)]
+        [InlineData("SomeAssembly", 12)]
+        [InlineData("First,Second,Third", 18)]
+        public void DescriptorResolver_CreatesErrorIfInvalidLookupText_DoesNotThrow(string lookupText, int errorLength)
         {
             // Arrange
             var errorSink = new ErrorSink();
@@ -1379,7 +1390,7 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
 
             // Assert
             var error = Assert.Single(errorSink.Errors);
-            Assert.Equal(1, error.Length);
+            Assert.Equal(errorLength, error.Length);
             Assert.Equal(documentLocation, error.Location);
             Assert.Equal(expectedErrorMessage, error.Message);
         }
@@ -1414,7 +1425,7 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
 
             // Assert
             var error = Assert.Single(errorSink.Errors);
-            Assert.Equal(1, error.Length);
+            Assert.Equal(21, error.Length);
             Assert.Equal(documentLocation, error.Location);
             Assert.Equal(expectedErrorMessage, error.Message);
         }

@@ -16,20 +16,22 @@ namespace Microsoft.AspNet.Razor.Test.Parser.CSharp
         [Fact]
         public void FunctionsDirectiveAutoCompleteAtEOF()
         {
-            ParseBlockTest("@functions{",
-                           new FunctionsBlock(
-                               Factory.CodeTransition("@")
-                                   .Accepts(AcceptedCharacters.None),
-                               Factory.MetaCode("functions{")
-                                   .Accepts(AcceptedCharacters.None),
-                               Factory.EmptyCSharp()
-                                   .AsFunctionsBody()
-                                   .With(new AutoCompleteEditHandler(CSharpLanguageCharacteristics.Instance.TokenizeString)
-                                   {
-                                       AutoCompleteString = "}"
-                                   })),
-                           new RazorError(RazorResources.FormatParseError_Expected_EndOfBlock_Before_EOF("functions", "}", "{"),
-                                          10, 0, 10));
+            ParseBlockTest(
+                "@functions{",
+                new FunctionsBlock(
+                    Factory.CodeTransition("@")
+                        .Accepts(AcceptedCharacters.None),
+                    Factory.MetaCode("functions{")
+                        .Accepts(AcceptedCharacters.None),
+                    Factory.EmptyCSharp()
+                        .AsFunctionsBody()
+                        .With(new AutoCompleteEditHandler(CSharpLanguageCharacteristics.Instance.TokenizeString)
+                        {
+                            AutoCompleteString = "}"
+                        })),
+                new RazorError(
+                    RazorResources.FormatParseError_Expected_EndOfBlock_Before_EOF("functions", "}", "{"),
+                    10, 0, 10, length: 1));
         }
 
         [Fact]
@@ -44,7 +46,7 @@ namespace Microsoft.AspNet.Razor.Test.Parser.CSharp
                     new MarkupBlock()),
                 new RazorError(
                     RazorResources.FormatParseError_Expected_X("}"),
-                    17, 0, 17));
+                    17, 0, 17, length: 1));
         }
 
         [Fact]
@@ -58,8 +60,12 @@ namespace Microsoft.AspNet.Razor.Test.Parser.CSharp
                                    .AsStatement()
                                    .With(new AutoCompleteEditHandler(CSharpLanguageCharacteristics.Instance.TokenizeString) { AutoCompleteString = "}" })
                                ),
-                           new RazorError(RazorResources.FormatParseError_Expected_EndOfBlock_Before_EOF(RazorResources.BlockName_Code, "}", "{"),
-                                          1, 0, 1));
+                           new RazorError(
+                               RazorResources.FormatParseError_Expected_EndOfBlock_Before_EOF(
+                                   RazorResources.BlockName_Code,
+                                   "}",
+                                   "{"),
+                                1, 0, 1, length: 1));
         }
 
         [Fact]
@@ -78,8 +84,12 @@ namespace Microsoft.AspNet.Razor.Test.Parser.CSharp
                                    {
                                        AutoCompleteString = "}"
                                    })),
-                           new RazorError(RazorResources.FormatParseError_Expected_EndOfBlock_Before_EOF("functions", "}", "{"),
-                                          10, 0, 10));
+                           new RazorError(
+                               RazorResources.FormatParseError_Expected_EndOfBlock_Before_EOF(
+                                   "functions",
+                                   "}",
+                                   "{"),
+                                10, 0, 10, length: 1));
         }
 
         [Fact]
@@ -99,8 +109,9 @@ namespace Microsoft.AspNet.Razor.Test.Parser.CSharp
                         Factory.Markup("Foo"),
                         new MarkupTagBlock(
                             Factory.Markup("</p>")))),
-                new RazorError(RazorResources.FormatParseError_Expected_X("}"),
-                                27 + Environment.NewLine.Length, 1, 10));
+                new RazorError(
+                    RazorResources.FormatParseError_Expected_X("}"),
+                    27 + Environment.NewLine.Length, 1, 10, length: 1));
         }
 
         [Fact]
@@ -122,8 +133,12 @@ namespace Microsoft.AspNet.Razor.Test.Parser.CSharp
                                Factory.Span(SpanKind.Code, new CSharpSymbol(Factory.LocationTracker.CurrentLocation, string.Empty, CSharpSymbolType.Unknown))
                                    .With(new StatementChunkGenerator())
                                ),
-                           new RazorError(RazorResources.FormatParseError_Expected_EndOfBlock_Before_EOF(RazorResources.BlockName_Code, "}", "{"),
-                                          1, 0, 1));
+                           new RazorError(
+                               RazorResources.FormatParseError_Expected_EndOfBlock_Before_EOF(
+                                   RazorResources.BlockName_Code,
+                                   "}",
+                                   "{"),
+                                1, 0, 1, length: 1));
         }
     }
 }

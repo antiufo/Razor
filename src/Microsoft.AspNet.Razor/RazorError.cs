@@ -11,21 +11,6 @@ namespace Microsoft.AspNet.Razor
     {
         internal const int DefaultErrorLength = 1;
 
-        public RazorError()
-            : this(message: string.Empty, location: SourceLocation.Undefined)
-        {
-        }
-
-        public RazorError(string message, SourceLocation location)
-            : this(message, location, DefaultErrorLength)
-        {
-        }
-
-        public RazorError(string message, int absoluteIndex, int lineIndex, int columnIndex)
-            : this(message, new SourceLocation(absoluteIndex, lineIndex, columnIndex))
-        {
-        }
-
         public RazorError(string message, SourceLocation location, int length)
         {
             Message = message;

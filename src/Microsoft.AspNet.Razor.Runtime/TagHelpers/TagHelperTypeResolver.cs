@@ -44,7 +44,7 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                 errorSink.OnError(
                     documentLocation,
                     Resources.TagHelperTypeResolver_TagHelperAssemblyNameCannotBeEmptyOrNull,
-                    name.Length);
+                    Math.Max(name?.Length ?? 1, 1));
 
                 return Type.EmptyTypes;
             }

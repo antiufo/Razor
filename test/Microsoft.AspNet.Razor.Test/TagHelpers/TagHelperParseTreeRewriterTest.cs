@@ -1237,10 +1237,12 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatNoCloseAngle, "p"),
-                                SourceLocation.Zero),
+                                SourceLocation.Zero,
+                                length: 14),
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatUnclosed, "p"),
-                                SourceLocation.Zero)
+                                SourceLocation.Zero,
+                                length: 14)
                         }
                     },
                     {
@@ -1257,10 +1259,12 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatNoCloseAngle, "p"),
-                                SourceLocation.Zero),
+                                SourceLocation.Zero,
+                                length: 14),
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatUnclosed, "p"),
-                                SourceLocation.Zero)
+                                SourceLocation.Zero,
+                                length: 31)
                         }
                     },
                     {
@@ -1283,7 +1287,7 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatNoCloseAngle, "p"),
-                                absoluteIndex: 15, lineIndex: 0, columnIndex: 15)
+                                absoluteIndex: 15, lineIndex: 0, columnIndex: 15, length: 3)
                         }
                     },
                     {
@@ -1300,7 +1304,7 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatNoCloseAngle, "p"),
-                                absoluteIndex: 32, lineIndex: 0, columnIndex: 32)
+                                absoluteIndex: 32, lineIndex: 0, columnIndex: 32, length: 3)
                         }
                     },
                     {
@@ -1316,10 +1320,12 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatNoCloseAngle, "p"),
-                                SourceLocation.Zero),
+                                SourceLocation.Zero,
+                                length: 15),
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatUnclosed, "p"),
-                                SourceLocation.Zero),
+                                SourceLocation.Zero,
+                                length: 15),
                         }
                     },
                     {
@@ -1336,10 +1342,12 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatNoCloseAngle, "p"),
-                                SourceLocation.Zero),
+                                SourceLocation.Zero,
+                                length: 32),
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatUnclosed, "p"),
-                                SourceLocation.Zero),
+                                SourceLocation.Zero,
+                                length: 32),
                         }
                     },
                     {
@@ -1355,10 +1363,11 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatNoCloseAngle, "p"),
-                                SourceLocation.Zero),
+                                SourceLocation.Zero,
+                                length: 15),
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatNoCloseAngle, "p"),
-                                absoluteIndex: 15, lineIndex: 0, columnIndex: 15)
+                                absoluteIndex: 15, lineIndex: 0, columnIndex: 15, length: 3)
                         }
                     },
                     {
@@ -1375,10 +1384,11 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatNoCloseAngle, "p"),
-                                SourceLocation.Zero),
+                                SourceLocation.Zero,
+                                length: 32),
                             new RazorError(
                                 string.Format(CultureInfo.InvariantCulture, errorFormatNoCloseAngle, "p"),
-                                absoluteIndex: 32, lineIndex: 0, columnIndex: 32)
+                                absoluteIndex: 32, lineIndex: 0, columnIndex: 32, length: 3)
                         }
                     },
                 };
@@ -1794,10 +1804,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "!text"),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 19)
                         }
                     },
                     {
@@ -1974,10 +1984,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "!text", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2),
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 7),
                         }
                     },
                     {
@@ -1989,7 +1999,7 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(errorFormatNormalNotStarted, "!text", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2),
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 8),
                         }
                     },
                     {
@@ -2019,10 +2029,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "!text", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2),
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 7),
                             new RazorError(
                                 string.Format(errorFormatMalformed, "text", CultureInfo.InvariantCulture),
-                                absoluteIndex: 9, lineIndex: 0, columnIndex: 9)
+                                absoluteIndex: 9, lineIndex: 0, columnIndex: 9, length: 7)
                         }
                     },
                     {
@@ -2038,7 +2048,7 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "text", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 6)
                         }
                     },
                     {
@@ -2069,10 +2079,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "text", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 6)
                         }
                     },
                     {
@@ -2094,10 +2104,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(errorFormatNormalNotStarted, "text", CultureInfo.InvariantCulture),
-                                absoluteIndex: 17, lineIndex: 0, columnIndex: 17),
+                                absoluteIndex: 17, lineIndex: 0, columnIndex: 17, length: 7),
                             new RazorError(
                                 string.Format(errorFormatMalformed, "text", CultureInfo.InvariantCulture),
-                                absoluteIndex: 17, lineIndex: 0, columnIndex: 17)
+                                absoluteIndex: 17, lineIndex: 0, columnIndex: 17, length: 7)
                         }
                     },
                 };
@@ -2152,10 +2162,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorEOFMatchingBrace, "!text}"),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 6)
                         }
                     },
                     {
@@ -2170,10 +2180,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorEOFMatchingBrace, "!text"),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 5)
                         }
                     },
                     {
@@ -2198,10 +2208,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorEOFMatchingBrace, "!text"),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 5)
                         }
                     },
                     {
@@ -2226,10 +2236,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                             {
                                 new RazorError(
                                     errorMatchingBrace,
-                                    absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                    absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                                 new RazorError(
                                     string.Format(errorEOFMatchingBrace, "!text"),
-                                    absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                    absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 5)
                             }
                     },
                     {
@@ -2257,10 +2267,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                                 {
                                     new RazorError(
                                         errorMatchingBrace,
-                                        absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                        absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                                     new RazorError(
                                         string.Format(errorEOFMatchingBrace, "!text"),
-                                        absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                        absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 5)
                                 }
                     },
                     {
@@ -2289,10 +2299,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                                 {
                                     new RazorError(
                                         errorMatchingBrace,
-                                        absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                        absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                                     new RazorError(
                                         string.Format(errorEOFMatchingBrace, "!text"),
-                                        absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                        absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 5)
                                 }
                     }
                 };
@@ -2346,10 +2356,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorEOFMatchingBrace, "!}"),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 2)
                         }
                     },
                     {
@@ -2360,10 +2370,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorEOFMatchingBrace, "!p}"),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 3)
                         }
                     },
                     {
@@ -2375,10 +2385,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorEOFMatchingBrace, "!p"),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 2)
                         }
                     },
                     {
@@ -2403,10 +2413,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorEOFMatchingBrace, "!p"),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 2)
                         }
                     },
                     {
@@ -2431,10 +2441,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                             {
                                 new RazorError(
                                     errorMatchingBrace,
-                                    absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                    absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                                 new RazorError(
                                     string.Format(errorEOFMatchingBrace, "!p"),
-                                    absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                    absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 2)
                             }
                     },
                     {
@@ -2466,10 +2476,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                             {
                                 new RazorError(
                                     errorMatchingBrace,
-                                    absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                    absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                                 new RazorError(
                                     string.Format(errorEOFMatchingBrace, "!p"),
-                                    absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                    absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 2)
                             }
                     },
                     {
@@ -2497,10 +2507,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                                 {
                                     new RazorError(
                                         errorMatchingBrace,
-                                        absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                        absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                                     new RazorError(
                                         string.Format(errorEOFMatchingBrace, "!p"),
-                                        absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                        absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 2)
                                 }
                     },
                     {
@@ -2530,10 +2540,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                                 {
                                     new RazorError(
                                         errorMatchingBrace,
-                                        absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                        absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                                     new RazorError(
                                         string.Format(errorEOFMatchingBrace, "!p"),
-                                        absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                        absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 2)
                                 }
                     }
                 };
@@ -2707,10 +2717,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "!p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2),
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 2),
                         }
                     },
                     {
@@ -2722,7 +2732,7 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(errorFormatNormalNotStarted, "!p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2),
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 2),
                         }
                     },
                     {
@@ -2752,10 +2762,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "!p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2),
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 2),
                             new RazorError(
                                 string.Format(errorFormatMalformed, "p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 6, lineIndex: 0, columnIndex: 6)
+                                absoluteIndex: 6, lineIndex: 0, columnIndex: 6, length: 4)
                         }
                     },
                     {
@@ -2768,10 +2778,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2),
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 5),
                             new RazorError(
                                 string.Format(errorFormatMalformed, "p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 3)
                         }
                     },
                     {
@@ -2799,13 +2809,13 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2),
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 3),
                             new RazorError(
                                 string.Format(errorFormatMalformed, "p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 3)
                         }
                     },
                     {
@@ -2827,10 +2837,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(errorFormatNormalNotStarted, "p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 11, lineIndex: 0, columnIndex: 11),
+                                absoluteIndex: 11, lineIndex: 0, columnIndex: 11, length: 4),
                             new RazorError(
                                 string.Format(errorFormatMalformed, "p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 11, lineIndex: 0, columnIndex: 11)
+                                absoluteIndex: 11, lineIndex: 0, columnIndex: 11, length: 4)
                         }
                     },
                     {
@@ -2852,16 +2862,16 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "strong", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2),
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 8),
                             new RazorError(
                                 string.Format(errorFormatMalformed, "strong", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2),
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 8),
                             new RazorError(
                                 string.Format(errorFormatNormalNotStarted, "strong", CultureInfo.InvariantCulture),
-                                absoluteIndex: 15, lineIndex: 0, columnIndex: 15),
+                                absoluteIndex: 15, lineIndex: 0, columnIndex: 15, length: 9),
                             new RazorError(
                                 string.Format(errorFormatMalformed, "strong", CultureInfo.InvariantCulture),
-                                absoluteIndex: 15, lineIndex: 0, columnIndex: 15)
+                                absoluteIndex: 15, lineIndex: 0, columnIndex: 15, length: 9)
                         }
                     },
                     {
@@ -2904,22 +2914,22 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2),
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 3),
                             new RazorError(
                                 string.Format(errorFormatMalformed, "p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2),
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 3),
                             new RazorError(
                                 string.Format(errorFormatMalformed, "strong", CultureInfo.InvariantCulture),
-                                absoluteIndex: 5, lineIndex: 0, columnIndex: 5),
+                                absoluteIndex: 5, lineIndex: 0, columnIndex: 5, length: 8),
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "!p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 23, lineIndex: 0, columnIndex: 23),
+                                absoluteIndex: 23, lineIndex: 0, columnIndex: 23, length: 4),
                             new RazorError(
                                 string.Format(errorFormatMalformed, "strong", CultureInfo.InvariantCulture),
-                                absoluteIndex: 27, lineIndex: 0, columnIndex: 27),
+                                absoluteIndex: 27, lineIndex: 0, columnIndex: 27, length: 9),
                             new RazorError(
                                 string.Format(errorFormatNormalNotStarted, "!p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 36, lineIndex: 0, columnIndex: 36),
+                                absoluteIndex: 36, lineIndex: 0, columnIndex: 36, length: 5),
                         }
                     },
                 };
@@ -2985,10 +2995,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 errorMatchingBrace,
-                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1),
+                                absoluteIndex: 1, lineIndex: 0, columnIndex: 1, length: 1),
                             new RazorError(
                                 string.Format(errorFormatNormalUnclosed, "!p"),
-                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2)
+                                absoluteIndex: 2, lineIndex: 0, columnIndex: 2, length: 16)
                         }
                     },
                     {
@@ -3174,7 +3184,7 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                         {
                             new RazorError(
                                 string.Format(errorFormatUnclosed, "p", CultureInfo.InvariantCulture),
-                                absoluteIndex: 4, lineIndex: 0, columnIndex: 4)
+                                absoluteIndex: 4, lineIndex: 0, columnIndex: 4, length: 4)
                         }
                     },
                     {
@@ -3183,8 +3193,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                             new MarkupTagHelperBlock("p", blockFactory.EscapedMarkupTagBlock("</", "p>"))),
                         new []
                         {
-                            new RazorError(string.Format(errorFormatUnclosed, "p", CultureInfo.InvariantCulture),
-                            SourceLocation.Zero)
+                            new RazorError(
+                                string.Format(errorFormatUnclosed, "p", CultureInfo.InvariantCulture),
+                                SourceLocation.Zero,
+                                length: 3)
                         }
                     },
                     {
@@ -3203,8 +3215,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                                 blockFactory.EscapedMarkupTagBlock("</", "p>"))),
                         new []
                         {
-                            new RazorError(string.Format(errorFormatUnclosed, "p", CultureInfo.InvariantCulture),
-                            SourceLocation.Zero)
+                            new RazorError(
+                                string.Format(errorFormatUnclosed, "p", CultureInfo.InvariantCulture),
+                                SourceLocation.Zero,
+                                length: 3)
                         }
                     },
                     {
@@ -3215,8 +3229,9 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                             blockFactory.MarkupTagBlock("</p>")),
                         new []
                         {
-                            new RazorError(string.Format(errorFormatUnclosed, "p", CultureInfo.InvariantCulture),
-                            absoluteIndex: 9, lineIndex: 0, columnIndex: 9)
+                            new RazorError(
+                                string.Format(errorFormatUnclosed, "p", CultureInfo.InvariantCulture),
+                                absoluteIndex: 9, lineIndex: 0, columnIndex: 9, length: 4)
                         }
                     },
                     {
@@ -3244,8 +3259,10 @@ namespace Microsoft.AspNet.Razor.Test.TagHelpers
                                 blockFactory.EscapedMarkupTagBlock("</", "p>"))),
                         new []
                         {
-                            new RazorError(string.Format(errorFormatUnclosed, "p", CultureInfo.InvariantCulture),
-                            SourceLocation.Zero)
+                            new RazorError(
+                                string.Format(errorFormatUnclosed, "p", CultureInfo.InvariantCulture),
+                                SourceLocation.Zero,
+                                length: 3)
                         }
                     },
                 };

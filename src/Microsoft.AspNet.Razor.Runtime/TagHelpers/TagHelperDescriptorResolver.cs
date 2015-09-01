@@ -102,7 +102,7 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                             "@" + directiveName,
                             directiveDescriptor.DirectiveText,
                             ex.Message),
-                        directiveDescriptor.DirectiveText.Length);
+                        GetErrorLength(directiveDescriptor.DirectiveText));
                 }
             }
 
@@ -185,7 +185,7 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                         directive.Location,
                         Resources.FormatTagHelperDescriptorResolver_InvalidTagHelperDirective(
                             SyntaxConstants.CSharp.TagHelperPrefixKeyword),
-                        directive.DirectiveText.Length);
+                        GetErrorLength(directive.DirectiveText));
                 }
             }
 
@@ -261,7 +261,7 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                 errorSink.OnError(
                     directiveDescriptor.Location,
                     Resources.FormatTagHelperDescriptorResolver_InvalidTagHelperLookupText(lookupText),
-                    directiveDescriptor.DirectiveText.Length);
+                    GetErrorLength(lookupText));
 
                 return null;
             }
@@ -277,6 +277,14 @@ namespace Microsoft.AspNet.Razor.Runtime.TagHelpers
                 AssemblyName = trimmedAssemblyName,
                 AssemblyNameLocation = assemblyNameLocation,
             };
+        }
+
+        private static int GetErrorLength(string directiveText)
+        {
+            var nonNullLength = directiveText?.Length ?? 1;
+            var normalizeEmptyStringLength = Math.Max(nonNullLength, 1);
+
+            return normalizeEmptyStringLength;
         }
 
         private class LookupInfo
