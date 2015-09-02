@@ -43,6 +43,25 @@ namespace Microsoft.AspNet.Razor.Test.Parser.Html
         }
 
         [Fact]
+        public void DynamicAttributeWithWhitespaceSurroundingEquals()
+        {
+            ParseBlockTest($"<a href {Environment.NewLine}= {Environment.NewLine}'@Foo' />",
+                new MarkupBlock(
+                    new MarkupTagBlock(
+                        Factory.Markup("<a"),
+                        new MarkupBlock(new AttributeBlockChunkGenerator(name: "href", prefix: new LocationTagged<string>($" href {Environment.NewLine}= {Environment.NewLine}'", 2, 0, 2), suffix: new LocationTagged<string>("'", 19, 2, 5)),
+                        Factory.Markup($" href {Environment.NewLine}= {Environment.NewLine}'").With(SpanChunkGenerator.Null),
+                            new MarkupBlock(new DynamicAttributeBlockChunkGenerator(new LocationTagged<string>(string.Empty, 15, 2, 1), 15, 2, 1),
+                                new ExpressionBlock(
+                                    Factory.CodeTransition(),
+                                    Factory.Code("Foo")
+                                           .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                                           .Accepts(AcceptedCharacters.NonWhiteSpace))),
+                            Factory.Markup("'").With(SpanChunkGenerator.Null)),
+                        Factory.Markup(" />").Accepts(AcceptedCharacters.None))));
+        }
+
+        [Fact]
         public void MultiPartLiteralAttribute()
         {
             ParseBlockTest("<a href='Foo Bar Baz' />",
@@ -343,12 +362,12 @@ namespace Microsoft.AspNet.Razor.Test.Parser.Html
         [Fact]
         public void ConditionalAttributesAreDisabledForDataAttributesInBlock()
         {
-            ParseBlockTest("<span data-foo='@foo'></span>",
+            ParseBlockTest("<span data-foo  =  '@foo'></span>",
                 new MarkupBlock(
                     new MarkupTagBlock(
                         Factory.Markup("<span"),
                         new MarkupBlock(
-                            Factory.Markup(" data-foo='"),
+                            Factory.Markup(" data-foo  =  '"),
                             new ExpressionBlock(
                                 Factory.CodeTransition(),
                                 Factory.Code("foo")
@@ -363,19 +382,18 @@ namespace Microsoft.AspNet.Razor.Test.Parser.Html
         [Fact]
         public void ConditionalAttributesAreDisabledForDataAttributesInDocument()
         {
-            ParseDocumentTest("<span data-foo='@foo'></span>",
+            ParseDocumentTest("<span data-foo=@foo ></span>",
                 new MarkupBlock(
                     new MarkupTagBlock(
                         Factory.Markup("<span"),
                         new MarkupBlock(
-                            Factory.Markup(" data-foo='"),
+                            Factory.Markup(" data-foo="),
                             new ExpressionBlock(
                                 Factory.CodeTransition(),
                                 Factory.Code("foo")
                                        .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                                       .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                            Factory.Markup("'")),
-                        Factory.Markup(">")),
+                                       .Accepts(AcceptedCharacters.NonWhiteSpace))),
+                        Factory.Markup(" >")),
                     new MarkupTagBlock(
                         Factory.Markup("</span>"))));
         }

@@ -856,9 +856,9 @@ namespace Microsoft.AspNet.Razor.Test.Generator
                                 characterOffsetIndex: 14,
                                 contentLength: 11),
                             BuildLineMapping(
-                                documentAbsoluteIndex: 62,
+                                documentAbsoluteIndex: 63,
                                 documentLineIndex: 3,
-                                documentCharacterOffsetIndex: 26,
+                                documentCharacterOffsetIndex: 27,
                                 generatedAbsoluteIndex: 1289,
                                 generatedLineIndex: 39,
                                 generatedCharacterOffsetIndex: 28,
@@ -871,9 +871,9 @@ namespace Microsoft.AspNet.Razor.Test.Generator
                                 characterOffsetIndex: 30,
                                 contentLength: 0),
                             BuildLineMapping(
-                                documentAbsoluteIndex: 88,
+                                documentAbsoluteIndex: 89,
                                 documentLineIndex: 4,
-                                documentCharacterOffsetIndex: 12,
+                                documentCharacterOffsetIndex: 13,
                                 generatedAbsoluteIndex: 1789,
                                 generatedLineIndex: 54,
                                 generatedCharacterOffsetIndex: 19,
@@ -1488,6 +1488,7 @@ namespace Microsoft.AspNet.Razor.Test.Generator
                 {
                     { "SingleTagHelper", null, DefaultPAndInputTagHelperDescriptors },
                     { "SingleTagHelperWithNewlineBeforeAttributes", null, DefaultPAndInputTagHelperDescriptors },
+                    { "TagHelpersWithWeirdlySpacedAttributes", null, DefaultPAndInputTagHelperDescriptors },
                     { "BasicTagHelpers", null, DefaultPAndInputTagHelperDescriptors },
                     { "BasicTagHelpers.RemoveTagHelper", null, DefaultPAndInputTagHelperDescriptors },
                     { "BasicTagHelpers.Prefixed", null, PrefixedPAndInputTagHelperDescriptors },

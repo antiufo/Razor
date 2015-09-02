@@ -587,7 +587,7 @@ namespace Microsoft.AspNet.Razor.Parser
                 // Output the attribute name, the equals and optional quote. Ex: foo="
                 Output(SpanKind.Markup);
 
-                if (whitespaceAfterEquals.Any())
+                if (quote == HtmlSymbolType.Unknown && whitespaceAfterEquals.Any())
                 {
                     return;
                 }
