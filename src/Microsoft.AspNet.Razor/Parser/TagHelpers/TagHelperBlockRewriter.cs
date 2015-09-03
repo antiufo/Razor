@@ -213,8 +213,8 @@ namespace Microsoft.AspNet.Razor.Parser.TagHelpers.Internal
                     SourceLocation symbolStartLocation;
 
                     // Skip the whitespace preceding the start of the attribute value.
-                    var valueStartIndex = i + 1;
-                    while(valueStartIndex < htmlSymbols.Length &&
+                    var valueStartIndex = i + 1; // Start from the symbol after '='.
+                    while (valueStartIndex < htmlSymbols.Length &&
                         (htmlSymbols[valueStartIndex].Type == HtmlSymbolType.WhiteSpace ||
                         htmlSymbols[valueStartIndex].Type == HtmlSymbolType.NewLine))
                     {

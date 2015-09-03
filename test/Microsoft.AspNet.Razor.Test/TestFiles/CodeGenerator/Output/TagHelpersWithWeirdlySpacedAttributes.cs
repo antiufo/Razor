@@ -1,4 +1,4 @@
-#pragma checksum "TagHelpersWithWeirdlySpacedAttributes.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "929d88adc7e4853aea859bc2c7dc989954bcc351"
+#pragma checksum "TagHelpersWithWeirdlySpacedAttributes.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "61ec0611b60d88357a6c3b6551513ebf6223f6ee"
 namespace TestOutput
 {
     using Microsoft.AspNet.Razor.Runtime.TagHelpers;
@@ -73,6 +73,45 @@ Write(true);
             __tagHelperExecutionContext.AddHtmlAttribute("data-content", Html.Raw("hello"));
             __tagHelperExecutionContext.Output = await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
             Instrumentation.BeginContext(124, 47, false);
+            await WriteTagHelperAsync(__tagHelperExecutionContext);
+            Instrumentation.EndContext();
+            __tagHelperExecutionContext = __tagHelperScopeManager.End();
+            Instrumentation.BeginContext(171, 4, true);
+            WriteLiteral("\r\n\r\n");
+            Instrumentation.EndContext();
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("p", TagMode.StartTagAndEndTag, "test", async() => {
+            }
+            , StartTagHelperWritingScope, EndTagHelperWritingScope);
+            __PTagHelper = CreateTagHelper<PTagHelper>();
+            __tagHelperExecutionContext.Add(__PTagHelper);
+#line 11 "TagHelpersWithWeirdlySpacedAttributes.cshtml"
+__PTagHelper.Age = 1234;
+
+#line default
+#line hidden
+            __tagHelperExecutionContext.AddTagHelperAttribute("age", __PTagHelper.Age);
+            __tagHelperExecutionContext.AddHtmlAttribute("data-content", Html.Raw("hello2"));
+            __tagHelperExecutionContext.Output = await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+            Instrumentation.BeginContext(175, 46, false);
+            await WriteTagHelperAsync(__tagHelperExecutionContext);
+            Instrumentation.EndContext();
+            __tagHelperExecutionContext = __tagHelperScopeManager.End();
+            Instrumentation.BeginContext(221, 4, true);
+            WriteLiteral("\r\n\r\n");
+            Instrumentation.EndContext();
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", TagMode.SelfClosing, "test", async() => {
+            }
+            , StartTagHelperWritingScope, EndTagHelperWritingScope);
+            __InputTagHelper = CreateTagHelper<InputTagHelper>();
+            __tagHelperExecutionContext.Add(__InputTagHelper);
+            __InputTagHelper2 = CreateTagHelper<InputTagHelper2>();
+            __tagHelperExecutionContext.Add(__InputTagHelper2);
+            __InputTagHelper.Type = "password";
+            __tagHelperExecutionContext.AddTagHelperAttribute("type", __InputTagHelper.Type);
+            __InputTagHelper2.Type = __InputTagHelper.Type;
+            __tagHelperExecutionContext.AddHtmlAttribute("data-content", Html.Raw("blah"));
+            __tagHelperExecutionContext.Output = await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+            Instrumentation.BeginContext(225, 51, false);
             await WriteTagHelperAsync(__tagHelperExecutionContext);
             Instrumentation.EndContext();
             __tagHelperExecutionContext = __tagHelperScopeManager.End();

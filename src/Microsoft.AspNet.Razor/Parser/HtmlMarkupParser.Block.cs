@@ -523,6 +523,7 @@ namespace Microsoft.AspNet.Razor.Parser
             // Accept the whitespace and name
             Accept(whitespace);
             Accept(nameSymbols);
+
             // Since this is not a minimized attribute, the whitespace after attribute name belongs to this attribute.
             Accept(whitespaceAfterAttributeName);
             Assert(HtmlSymbolType.Equals); // We should be at "="
