@@ -321,7 +321,7 @@ namespace Microsoft.AspNet.Razor.Parser
                 PutCurrentBack();
             }
 
-            CompleteBlock(insertMarkerIfNecessary: false);
+            CompleteBlock(insertMarkerIfNecessary: false, captureWhitespaceToEndOfLine: true);
             Output(SpanKind.MetaCode);
         }
 

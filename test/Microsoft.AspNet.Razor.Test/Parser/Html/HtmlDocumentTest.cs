@@ -261,6 +261,20 @@ namespace Microsoft.AspNet.Razor.Test.Parser.Html
         }
 
         [Fact]
+        public void ParseDocumentDoesNotRenderExtraNewLine()
+        {
+            ParseDocumentTest("@{\r\n}\r\n<html>",
+                new MarkupBlock(
+                    Factory.EmptyHtml(),
+                    new StatementBlock(
+                        Factory.CodeTransition(),
+                        Factory.MetaCode("{").Accepts(AcceptedCharacters.None),
+                        Factory.Code("\r\n").AsStatement().AutoCompleteWith(null, false),
+                        Factory.MetaCode("}\r\n").Accepts(AcceptedCharacters.None)),
+                    BlockFactory.MarkupTagBlock("<html>")));
+        }
+
+        [Fact]
         public void ParseSectionIgnoresTagsInContentsOfScriptTag()
         {
             ParseDocumentTest(@"@section Foo { <script>foo<bar baz='@boz'></script> }",
