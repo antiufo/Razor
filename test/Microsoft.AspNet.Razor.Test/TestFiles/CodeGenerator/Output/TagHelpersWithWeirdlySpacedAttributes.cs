@@ -1,4 +1,4 @@
-﻿#pragma checksum "TagHelpersWithWeirdlySpacedAttributes.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "28d049638bc8b665f1a0b5fa1e3704261e413e5a"
+#pragma checksum "TagHelpersWithWeirdlySpacedAttributes.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "929d88adc7e4853aea859bc2c7dc989954bcc351"
 namespace TestOutput
 {
     using Microsoft.AspNet.Razor.Runtime.TagHelpers;
@@ -30,7 +30,7 @@ namespace TestOutput
             WriteLiteral("\r\n");
             Instrumentation.EndContext();
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("p", TagMode.StartTagAndEndTag, "test", async() => {
-                Instrumentation.BeginContext(84, 11, true);
+                Instrumentation.BeginContext(105, 11, true);
                 WriteLiteral("Body of Tag");
                 Instrumentation.EndContext();
             }
@@ -44,12 +44,20 @@ namespace TestOutput
 #line default
 #line hidden
             __tagHelperExecutionContext.AddTagHelperAttribute("age", __PTagHelper.Age);
+            StartTagHelperWritingScope();
+#line 7 "TagHelpersWithWeirdlySpacedAttributes.cshtml"
+Write(true);
+
+#line default
+#line hidden
+            __tagHelperStringValueBuffer = EndTagHelperWritingScope();
+            __tagHelperExecutionContext.AddHtmlAttribute("data-content", Html.Raw(__tagHelperStringValueBuffer.ToString()));
             __tagHelperExecutionContext.Output = await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
-            Instrumentation.BeginContext(35, 64, false);
+            Instrumentation.BeginContext(35, 85, false);
             await WriteTagHelperAsync(__tagHelperExecutionContext);
             Instrumentation.EndContext();
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
-            Instrumentation.BeginContext(99, 4, true);
+            Instrumentation.BeginContext(120, 4, true);
             WriteLiteral("\r\n\r\n");
             Instrumentation.EndContext();
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", TagMode.SelfClosing, "test", async() => {
@@ -64,7 +72,7 @@ namespace TestOutput
             __InputTagHelper2.Type = __InputTagHelper.Type;
             __tagHelperExecutionContext.AddHtmlAttribute("data-content", Html.Raw("hello"));
             __tagHelperExecutionContext.Output = await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
-            Instrumentation.BeginContext(103, 45, false);
+            Instrumentation.BeginContext(124, 47, false);
             await WriteTagHelperAsync(__tagHelperExecutionContext);
             Instrumentation.EndContext();
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
