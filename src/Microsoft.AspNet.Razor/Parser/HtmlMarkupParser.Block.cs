@@ -466,8 +466,7 @@ namespace Microsoft.AspNet.Razor.Parser
 
                 // capture whitespace after attribute name (if any)
                 whitespaceAfterAttributeName = ReadWhile(
-                    sym => sym.Type == HtmlSymbolType.WhiteSpace ||
-                    sym.Type == HtmlSymbolType.NewLine);
+                    sym => sym.Type == HtmlSymbolType.WhiteSpace || sym.Type == HtmlSymbolType.NewLine);
             }
             else
             {
@@ -557,7 +556,7 @@ namespace Microsoft.AspNet.Razor.Parser
                 // or if there is no whitespace between '=' and the unquoted value.
                 if (quote != HtmlSymbolType.Unknown || !whitespaceAfterEquals.Any())
                 {
-                    // Read the values
+                    // Read the attribute value.
                     while (!EndOfFile && !IsEndOfAttributeValue(quote, CurrentSymbol))
                     {
                         AttributeValue(quote);

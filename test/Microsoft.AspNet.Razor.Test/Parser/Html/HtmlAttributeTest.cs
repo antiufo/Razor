@@ -376,6 +376,26 @@ namespace Microsoft.AspNet.Razor.Test.Parser.Html
         [Fact]
         public void ConditionalAttributesAreDisabledForDataAttributesInBlock()
         {
+            ParseBlockTest("<span data-foo='@foo'></span>",
+                new MarkupBlock(
+                    new MarkupTagBlock(
+                        Factory.Markup("<span"),
+                        new MarkupBlock(
+                            Factory.Markup(" data-foo='"),
+                            new ExpressionBlock(
+                                Factory.CodeTransition(),
+                                Factory.Code("foo")
+                                       .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                                       .Accepts(AcceptedCharacters.NonWhiteSpace)),
+                            Factory.Markup("'")),
+                        Factory.Markup(">").Accepts(AcceptedCharacters.None)),
+                    new MarkupTagBlock(
+                        Factory.Markup("</span>").Accepts(AcceptedCharacters.None))));
+        }
+
+        [Fact]
+        public void ConditionalAttributesWithWeirdSpacingAreDisabledForDataAttributesInBlock()
+        {
             ParseBlockTest("<span data-foo  =  '@foo'></span>",
                 new MarkupBlock(
                     new MarkupTagBlock(
@@ -395,6 +415,26 @@ namespace Microsoft.AspNet.Razor.Test.Parser.Html
 
         [Fact]
         public void ConditionalAttributesAreDisabledForDataAttributesInDocument()
+        {
+            ParseDocumentTest("<span data-foo='@foo'></span>",
+                new MarkupBlock(
+                    new MarkupTagBlock(
+                        Factory.Markup("<span"),
+                        new MarkupBlock(
+                            Factory.Markup(" data-foo='"),
+                            new ExpressionBlock(
+                                Factory.CodeTransition(),
+                                Factory.Code("foo")
+                                       .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                                       .Accepts(AcceptedCharacters.NonWhiteSpace)),
+                            Factory.Markup("'")),
+                        Factory.Markup(">")),
+                    new MarkupTagBlock(
+                        Factory.Markup("</span>"))));
+        }
+
+        [Fact]
+        public void ConditionalAttributesWithWeirdSpacingAreDisabledForDataAttributesInDocument()
         {
             ParseDocumentTest("<span data-foo=@foo ></span>",
                 new MarkupBlock(
