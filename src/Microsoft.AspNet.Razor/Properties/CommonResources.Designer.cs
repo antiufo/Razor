@@ -8,7 +8,12 @@ namespace Microsoft.AspNet.Razor
     internal static class CommonResources
     {
         private static readonly ResourceManager _resourceManager
+#if SHAMAN
+            = new ResourceManager("Shaman.Razor.CommonResources", typeof(CommonResources).GetTypeInfo().Assembly);
+#else
             = new ResourceManager("Microsoft.AspNet.Razor.CommonResources", typeof(CommonResources).GetTypeInfo().Assembly);
+#endif
+
 
         /// <summary>
         /// Value cannot be null or an empty string.

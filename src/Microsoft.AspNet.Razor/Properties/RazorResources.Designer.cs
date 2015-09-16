@@ -8,7 +8,11 @@ namespace Microsoft.AspNet.Razor
     internal static class RazorResources
     {
         private static readonly ResourceManager _resourceManager
+#if SHAMAN
+            = new ResourceManager("Shaman.Razor.RazorResources", typeof(RazorResources).GetTypeInfo().Assembly);
+#else
             = new ResourceManager("Microsoft.AspNet.Razor.RazorResources", typeof(RazorResources).GetTypeInfo().Assembly);
+#endif
 
         /// <summary>
         /// The active parser must be the same as either the markup or code parser.
