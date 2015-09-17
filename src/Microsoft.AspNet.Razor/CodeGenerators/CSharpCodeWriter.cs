@@ -107,7 +107,7 @@ namespace Microsoft.AspNet.Razor.CodeGenerators
 
         public CSharpCodeWriter WriteLocationTaggedString(LocationTagged<string> value)
         {
-            WriteStartMethodInvocation("Tuple.Create");
+            WriteStartMethodInvocation("ValueTuple.Create");
             WriteStringLiteral(value.Value);
             WriteParameterSeparator();
             Write(value.Location.AbsoluteIndex.ToString(CultureInfo.CurrentCulture));

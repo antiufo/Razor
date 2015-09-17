@@ -168,10 +168,10 @@ namespace Microsoft.AspNet.Razor.CodeGenerators.Visitors
             var code = chunk.Children.FirstOrDefault();
             if (code is ExpressionChunk || code is ExpressionBlockChunk)
             {
-                Writer.WriteStartMethodInvocation("Tuple.Create")
+                Writer.WriteStartMethodInvocation("ValueTuple.Create")
                         .WriteLocationTaggedString(chunk.Prefix)
                         .WriteParameterSeparator()
-                        .WriteStartMethodInvocation("Tuple.Create", new string[] { "System.Object", "System.Int32" });
+                        .WriteStartMethodInvocation("ValueTuple.Create", new string[] { "System.Object", "System.Int32" });
 
                 Context.ExpressionRenderingMode = ExpressionRenderingMode.InjectCode;
 
@@ -186,10 +186,10 @@ namespace Microsoft.AspNet.Razor.CodeGenerators.Visitors
             }
             else
             {
-                Writer.WriteStartMethodInvocation("Tuple.Create")
+                Writer.WriteStartMethodInvocation("ValueTuple.Create")
                        .WriteLocationTaggedString(chunk.Prefix)
                        .WriteParameterSeparator()
-                       .WriteStartMethodInvocation("Tuple.Create", new string[] { "System.Object", "System.Int32" })
+                       .WriteStartMethodInvocation("ValueTuple.Create", new string[] { "System.Object", "System.Int32" })
                        .WriteStartNewObject(Context.Host.GeneratedClassContext.TemplateTypeName);
 
                 using (Writer.BuildLambda(endLine: false, parameterNames: ValueWriterName))
@@ -226,13 +226,13 @@ namespace Microsoft.AspNet.Razor.CodeGenerators.Visitors
             }
 
             Writer.WriteParameterSeparator()
-                   .WriteStartMethodInvocation("Tuple.Create")
+                   .WriteStartMethodInvocation("ValueTuple.Create")
                    .WriteLocationTaggedString(chunk.Prefix)
                    .WriteParameterSeparator();
 
             if (visitChildren)
             {
-                Writer.WriteStartMethodInvocation("Tuple.Create", new string[] { "System.Object", "System.Int32" });
+                Writer.WriteStartMethodInvocation("ValueTuple.Create", new string[] { "System.Object", "System.Int32" });
 
                 var currentRenderingMode = Context.ExpressionRenderingMode;
                 Context.ExpressionRenderingMode = ExpressionRenderingMode.InjectCode;
