@@ -8,7 +8,9 @@
   "compile": "../**/*.cs",
   "compilationOptions": {
     "keyFile": "../Key.snk",
-    "define": ["SHAMAN"]
+    "define": [
+      "SHAMAN"
+    ]
   },
   "dependencies": {
     "Microsoft.Framework.HashCodeCombiner.Sources": {
